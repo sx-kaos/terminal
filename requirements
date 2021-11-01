@@ -1,0 +1,17 @@
+os
+time
+pynput
+datetime
+psutil
+platform
+webbrowser
+random
+GPUtil
+cpuinfo
+string
+colorama
+ctypes
+sys
+win32api
+
+these are all python modules
