@@ -1,6 +1,5 @@
 os
 time
-pynput
 datetime
 time
 psutil
