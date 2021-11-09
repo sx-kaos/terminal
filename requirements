@@ -1,24 +1,21 @@
-import os 
-import time
-import pynput
-import datetime
-import time
-import psutil
-import platform
-import webbrowser
-from datetime import *
-import random
-import GPUtil
-import cpuinfo
-import string
-import colorama
-import ctypes
-import sys
-from time import sleep
-from os import * 
-from colorama import init
-from win32api import GetSystemMetrics
-from alive_progress import alive_bar
-from halo import Halo
+os
+time
+pynput
+datetime
+time
+psutil
+platform
+webbrowser
+time
+random
+GPUtil
+cpuinfo
+string
+colorama
+ctypes
+sys
+colorama
+win32api
+halo
 
 these are all python modules
