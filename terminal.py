@@ -23,24 +23,24 @@ from halo import Halo
 #gathering all system information needed
 class needed():
     ctypes.windll.kernel32.SetConsoleTitleW(f" ")
-    spinner = Halo(text='Loading', spinner='dots', color = 'cyan') #front end
+    spinner = Halo(text='Loading', spinner='dots', color = 'cyan')
     spinner.start() #loading screen whilst gathering system info
-    today = date.today()
-    now = datetime.now()
-    date = today.strftime("%B %d, %Y")
-    username = os.getlogin()
-    os_name = platform.system()
-    os_release = platform.release()
-    cpu = cpuinfo.get_cpu_info()['brand_raw']
-    monitor_width = GetSystemMetrics(0)
-    monitor_height = GetSystemMetrics(1)
-    lib = ctypes.windll.kernel32
-    t = lib.GetTickCount64()
-    t = int(str(t)[:-3])
-    mins, sec = divmod(t, 60)
-    hour, mins = divmod(mins, 60)
-    days, hour = divmod(hour, 24)
-    ram = round(psutil.virtual_memory().total/1000000000, 2) #in Gigabytes
+    today = date.today() #get date and time
+    now = datetime.now() #get date and time
+    date = today.strftime("%B %d, %Y") #get date and time
+    username = os.getlogin() #get user name
+    os_name = platform.system() #get OS name
+    os_release = platform.release() #get OS release version, e.g. 10
+    cpu = cpuinfo.get_cpu_info()['brand_raw'] #get CPU name
+    monitor_width = GetSystemMetrics(0) #get Monitor width and height
+    monitor_height = GetSystemMetrics(1) #get Monitor width and height
+    lib = ctypes.windll.kernel32 #getting how long the machine has been on for (uptime)
+    t = lib.GetTickCount64() #getting how long the machine has been on for (uptime)
+    t = int(str(t)[:-3]) #getting how long the machine has been on for (uptime)
+    mins, sec = divmod(t, 60) #getting how long the machine has been on for (uptime)
+    hour, mins = divmod(mins, 60) #getting how long the machine has been on for (uptime)
+    days, hour = divmod(hour, 24) #getting how long the machine has been on for (uptime)
+    ram = round(psutil.virtual_memory().total/1000000000, 2) #get RAM in Gigabytes
     spinner.stop() # stop loading screen once system info gathered
     os.system('cls' if os.name == 'nt' else 'clear')
 
