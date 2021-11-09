@@ -121,7 +121,7 @@ def main():
 		print(f" {c.cyan}Uptime:{c.white} {needed.days} Day(s), {needed.hour:02} Hour(s), {needed.mins:02} Min(s)")
 		print(f" {c.cyan}Resolution:{c.white} {needed.monitor_width}x{needed.monitor_height}")
 		print(f" {c.cyan}CPU:{c.white} {needed.cpu}")
-		print(f" {c.cyan}RAM:{c.white} {needed.ram}")
+		print(f" {c.cyan}RAM:{c.white} {needed.ram}GB")
 		print(f"╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯")
 		main()
 	elif command == 'help':
