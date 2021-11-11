@@ -88,6 +88,8 @@ def main():
 				 'time',
 				 'google',
 				 'ping',
+				 'cd',
+				 'dir',
 				 '',
 				 '	']
 		if command == 'cls':
@@ -128,7 +130,7 @@ def main():
 			print(f"╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯")
 			main()
 		elif command == 'help':
-			print(f"commands:\nhelp - shows all commands\ncls/clear - clears terminal screen\ndate/time - shows the date/time\ngoogle - googles the argument given, e.g. google youtube\nping - pings a domain/IP address\nneofetch - displays (some) system information\nif/ipconfig - displays (your) ip address information")
+			print(f"commands:\nhelp - shows all commands\ncls/clear - clears terminal screen\ndate/time - shows the date/time\ngoogle - googles the argument given, e.g. google youtube\nping - pings a domain/IP address\nneofetch - displays (some) system information\nif/ipconfig - displays (your) ip address information\ncd - shows current directory and allows you to switch directory\ndir - displays all files in the current directory")
 			main()
 		elif command == 'date':
 			print(f"{needed.date}")
@@ -166,10 +168,18 @@ def main():
 		elif command == 'ipconfig':
 			os.system('ipconfig')
 			main()
+		elif command == 'dir':
+			os.system(f'dir')
+			main()
+		elif command == 'cd':
+			os.system('cd')
+			directory = input(f'Directory to change to: ')
+			os.system(f'cd {directory}')
+			main()
 		elif command not in valid:
 		    print(f"{command} is not recognised as a valid command")
 		    main()
 	except KeyboardInterrupt:
-		print("")
+		print("^C")
 		main()
 main()
