@@ -1,5 +1,6 @@
 import os 
 import time
+import pynput
 import datetime
 import time
 import psutil
@@ -23,24 +24,24 @@ from halo import Halo
 #gathering all system information needed
 class needed():
     ctypes.windll.kernel32.SetConsoleTitleW(f" ")
-    spinner = Halo(text='Loading', spinner='dots', color = 'cyan')
+    spinner = Halo(text='Loading', spinner='dots', color = 'cyan') #front end
     spinner.start() #loading screen whilst gathering system info
-    today = date.today() #get date and time
-    now = datetime.now() #get date and time
-    date = today.strftime("%B %d, %Y") #get date and time
-    username = os.getlogin() #get user name
-    os_name = platform.system() #get OS name
-    os_release = platform.release() #get OS release version, e.g. 10
-    cpu = cpuinfo.get_cpu_info()['brand_raw'] #get CPU name
-    monitor_width = GetSystemMetrics(0) #get Monitor width and height
-    monitor_height = GetSystemMetrics(1) #get Monitor width and height
-    lib = ctypes.windll.kernel32 #getting how long the machine has been on for (uptime)
-    t = lib.GetTickCount64() #getting how long the machine has been on for (uptime)
-    t = int(str(t)[:-3]) #getting how long the machine has been on for (uptime)
-    mins, sec = divmod(t, 60) #getting how long the machine has been on for (uptime)
-    hour, mins = divmod(mins, 60) #getting how long the machine has been on for (uptime)
-    days, hour = divmod(hour, 24) #getting how long the machine has been on for (uptime)
-    ram = round(psutil.virtual_memory().total/1000000000, 2) #get RAM in Gigabytes
+    today = date.today()
+    now = datetime.now()
+    date = today.strftime("%B %d, %Y")
+    username = os.getlogin()
+    os_name = platform.system()
+    os_release = platform.release()
+    cpu = cpuinfo.get_cpu_info()['brand_raw']
+    monitor_width = GetSystemMetrics(0)
+    monitor_height = GetSystemMetrics(1)
+    lib = ctypes.windll.kernel32
+    t = lib.GetTickCount64()
+    t = int(str(t)[:-3])
+    mins, sec = divmod(t, 60)
+    hour, mins = divmod(mins, 60)
+    days, hour = divmod(hour, 24)
+    ram = round(psutil.virtual_memory().total/1000000000, 2) #in Gigabytes
     spinner.stop() # stop loading screen once system info gathered
     os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -75,21 +76,23 @@ print(f"""
 {c.cyan}╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯
 """)
 def main():
-	print(f"{c.white}╭{needed.username}@lunar")
-	command = input(f"{c.white}╰─→ ")
-	valid = ['neofetch',
-			 'help',
-			 'cls',
-			 'clear',
-			 'date',
-			 'time',
-			 'google',
-			 'ping',
-			 '',
-			 '	']
-	if command == 'cls':
-		os.system('cls' if os.name == 'nt' else 'clear')
-		print(f"""
+	try:
+		print(f"{c.white}╭{needed.username}@lunar")
+		command = input(f"{c.white}╰─→ ")
+		valid = ['neofetch',
+				 'help',
+				 'cls',
+				 'clear',
+				 'date',
+				 'exit',
+				 'time',
+				 'google',
+				 'ping',
+				 '',
+				 '	']
+		if command == 'cls':
+			os.system('cls' if os.name == 'nt' else 'clear')
+			print(f"""
 {c.cyan}╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮
 {c.cyan}│    {c.white}__                                                                      {c.cyan}│
 {c.cyan}│   {c.white}/ /  __  __   ____   ____ _   _____                                      {c.cyan}│
@@ -98,13 +101,13 @@ def main():
 {c.cyan}│{c.white}/_/   \____/  /_/ /_/ \____/  /_/                                           {c.cyan}│
 {c.cyan}│                                                                            {c.cyan}│
 {c.cyan}╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯
-""")
-		main()
-	elif command == '':
-		main()
-	elif command == 'clear':
-		os.system('cls' if os.name == 'nt' else 'clear')
-		print(f"""
+	""")
+			main()
+		elif command == '':
+			main()
+		elif command == 'clear':
+			os.system('cls' if os.name == 'nt' else 'clear')
+			print(f"""
 {c.cyan}╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮
 {c.cyan}│    {c.white}__                                                                      {c.cyan}│
 {c.cyan}│   {c.white}/ /  __  __   ____   ____ _   _____                                      {c.cyan}│
@@ -113,38 +116,58 @@ def main():
 {c.cyan}│{c.white}/_/   \____/  /_/ /_/ \____/  /_/                                           {c.cyan}│
 {c.cyan}│                                                                            {c.cyan}│
 {c.cyan}╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯
-""")
+	""")
+			main()
+		elif command == 'neofetch':
+			print(f"╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮")
+			print(f" {c.cyan}OS:{c.white} {needed.os_name} {needed.os_release}")
+			print(f" {c.cyan}Uptime:{c.white} {needed.days} Day(s), {needed.hour:02} Hour(s), {needed.mins:02} Min(s)")
+			print(f" {c.cyan}Resolution:{c.white} {needed.monitor_width}x{needed.monitor_height}")
+			print(f" {c.cyan}CPU:{c.white} {needed.cpu}")
+			print(f" {c.cyan}RAM:{c.white} {needed.ram}GB")
+			print(f"╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯")
+			main()
+		elif command == 'help':
+			print(f"commands:\nhelp - shows all commands\ncls/clear - clears terminal screen\ndate/time - shows the date/time\ngoogle - googles the argument given, e.g. google youtube\nping - pings a domain/IP address\nneofetch - displays (some) system information\nif/ipconfig - displays (your) ip address information")
+			main()
+		elif command == 'date':
+			print(f"{needed.date}")
+			main()
+		elif command == 'time':
+			now = datetime.now()
+			time2 = now.strftime("%H:%M:%S")
+			print(f"{time2}")
+			main()
+		elif command == 'google':
+			query = input("What do you want to search up? ")
+			webbrowser.open_new_tab(query)
+			main()
+		elif command == 'ping':
+			try:
+				amount = int(input(f'How many times do you want to ping?: '))
+				target = input("Target to ping: ")
+				for i in range(int(amount)):
+					os.system(f'PING -n 1 {target} | FIND "TTL="')
+					os.system(f'IF ERRORLEVEL 1 (SET in=c & echo offline)')
+					os.system(f'ping -t 2 0 10 127.0.0.1 >nul')
+				main()
+			except ValueError:
+				print(f'{amount} is not a valid number, please try again')
+				main()
+			main()
+		elif command == 'exit':
+			exit()
+		elif command == 'ifconfig':
+			os.system('ipconfig')
+			main()
+		elif command == 'ipconfig':
+			os.system('ipconfig')
+			main()
+		elif command not in valid:
+		    print(f"{command} is not recognised as a valid command")
+		    main()
+	except KeyboardInterrupt:
+		print("\n")
 		main()
-	elif command == 'neofetch':
-		print(f"╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮")
-		print(f" {c.cyan}OS:{c.white} {needed.os_name} {needed.os_release}")
-		print(f" {c.cyan}Uptime:{c.white} {needed.days} Day(s), {needed.hour:02} Hour(s), {needed.mins:02} Min(s)")
-		print(f" {c.cyan}Resolution:{c.white} {needed.monitor_width}x{needed.monitor_height}")
-		print(f" {c.cyan}CPU:{c.white} {needed.cpu}")
-		print(f" {c.cyan}RAM:{c.white} {needed.ram}GB")
-		print(f"╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯")
-		main()
-	elif command == 'help':
-		print(f"commands:\nhelp - shows all commands\ncls/clear - clears terminal screen\ndate/time - shows the date/time\ngoogle - googles the argument given, e.g. google youtube\nping - pings a domain/IP address\nneofetch - displays (some) system information")
-		main()
-	elif command == 'date':
-		print(f"{needed.date}")
-		main()
-	elif command == 'time':
-		now = datetime.now()
-		time2 = now.strftime("%H:%M:%S")
-		print(f"{time2}")
-		main()
-	elif command == 'google':
-		query = input("What do you want to search up? ")
-		webbrowser.open_new_tab(query)
-		main()
-	elif command == 'ping':
-		target = input("Target to ping: ")
-		os.system(f'ping {target}')
-		command()
-	elif command not in valid:
-	    print(f"{command} is not recognised as a valid command")
-	    main()
 main()
 
