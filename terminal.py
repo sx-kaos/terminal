@@ -145,6 +145,9 @@ def main():
 		elif command == 'ping':
 			try:
 				amount = int(input(f'How many times do you want to ping?: '))
+				if amount == int(0):
+					print(f'please enter an amount greater than zero')
+					main()
 				target = input("Target to ping: ")
 				for i in range(int(amount)):
 					os.system(f'PING -n 1 {target} | FIND "TTL="')
@@ -167,7 +170,6 @@ def main():
 		    print(f"{command} is not recognised as a valid command")
 		    main()
 	except KeyboardInterrupt:
-		print("\n")
+		print("")
 		main()
 main()
-
