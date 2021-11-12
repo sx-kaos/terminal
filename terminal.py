@@ -93,6 +93,7 @@ def main():
 				 'google',
 				 'ping',
 				 'dir',
+				 'py',
 				 '',
 				 '	']
 		if command == 'cls':
@@ -144,6 +145,7 @@ def main():
 			print(f"nslookup - lookup a domain or IP address")
 			print(f"cd - change directory")
 			print(f"mkdir - make a folder")
+			print(f"py - open the python shell inside of the terminal")
 			print(f"exit - closes the terminal")
 			main()
 		elif command == 'date':
@@ -183,8 +185,7 @@ def main():
 			os.system('ipconfig /all')
 			main()
 		elif command == 'dir':
-			arguments = input("Any arguments? ")
-			os.system(f'dir {arguments}')
+			os.system(f'dir /a')
 			main()
 		elif command == 'cd':
 			path = input("Path: ")
@@ -213,6 +214,9 @@ def main():
 			except FileNotFoundError:
 				print(f"'{folder}' is not a valid name for a folder")
 				main()
+			main()
+		elif command == 'py':
+			system('py')
 			main()
 		elif command not in valid:
 		    print(f"{command} is not recognised as a valid command")
