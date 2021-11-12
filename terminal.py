@@ -143,6 +143,7 @@ def main():
 			print(f"ip/ifconfig - displays IP information")
 			print(f"nslookup - lookup a domain or IP address")
 			print(f"cd - change directory")
+			print(f"mkdir - make a folder")
 			print(f"exit - closes the terminal")
 			main()
 		elif command == 'date':
@@ -204,6 +205,14 @@ def main():
 				print(f"'{target}' is not a valid IP/domain")
 				main()
 			system(f'nslookup {target}')
+			main()
+		elif command == 'mkdir':
+			folder = input(f'Folder name: ')
+			try:
+				os.mkdir(folder)
+			except FileNotFoundError:
+				print(f"'{folder}' is not a valid name for a folder")
+				main()
 			main()
 		elif command not in valid:
 		    print(f"{command} is not recognised as a valid command")
