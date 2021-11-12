@@ -87,6 +87,7 @@ def main():
 				 'clear',
 				 'date',
 				 'exit',
+			 	 'cd',
 				 'time',
 				 'google',
 				 'ping',
