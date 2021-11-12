@@ -15,7 +15,7 @@ import colorama
 import ctypes
 import sys
 from time import sleep
-from os import * 
+from os import *
 from colorama import init
 from win32api import GetSystemMetrics
 from alive_progress import alive_bar
@@ -82,13 +82,14 @@ def main():
 		valid = ['neofetch',
 				 'help',
 				 'cls',
+				 'ipconfig'
+				 'ifconfig',
 				 'clear',
 				 'date',
 				 'exit',
 				 'time',
 				 'google',
 				 'ping',
-				 'cd',
 				 'dir',
 				 '',
 				 '	']
@@ -127,10 +128,18 @@ def main():
 			print(f" {c.cyan}Resolution:{c.white} {needed.monitor_width}x{needed.monitor_height}")
 			print(f" {c.cyan}CPU:{c.white} {needed.cpu}")
 			print(f" {c.cyan}RAM:{c.white} {needed.ram}GB")
-			print(f"╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯")
+			print(f"{c.white}╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯")
 			main()
 		elif command == 'help':
-			print(f"commands:\nhelp - shows all commands\ncls/clear - clears terminal screen\ndate/time - shows the date/time\ngoogle - googles the argument given, e.g. google youtube\nping - pings a domain/IP address\nneofetch - displays (some) system information\nif/ipconfig - displays (your) ip address information\ncd - shows current directory and allows you to switch directory\ndir - displays all files in the current directory")
+			print(f"help - shows all commands")
+			print(f"neofetch - displays (some) system information")
+			print(f"cls/clear - clears the window")
+			print(f"date/time - displays date or time")
+			print(f"ping - ping a domain or IP address")
+			print(f"dir - displays all files in the current directory")
+			print(f"google - searchs something in your installed webbrowser")
+			print(f"ip/ifconfig - displays IP information")
+			print(f"exit - closes the terminal")
 			main()
 		elif command == 'date':
 			print(f"{needed.date}")
@@ -163,18 +172,21 @@ def main():
 		elif command == 'exit':
 			exit()
 		elif command == 'ifconfig':
-			os.system('ipconfig')
+			os.system('ipconfig /all')
 			main()
 		elif command == 'ipconfig':
-			os.system('ipconfig')
+			os.system('ipconfig /all')
 			main()
 		elif command == 'dir':
-			os.system(f'dir')
+			arguments = input("Any arguments? ")
+			os.system(f'dir {arguments}')
 			main()
 		elif command == 'cd':
-			os.system('cd')
-			directory = input(f'Directory to change to: ')
-			os.system(f'cd {directory}')
+			path = input("Path: ")
+			try:
+				os.chdir(path)
+			except OSError:
+				print("Invalid path")
 			main()
 		elif command not in valid:
 		    print(f"{command} is not recognised as a valid command")
