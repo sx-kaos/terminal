@@ -87,8 +87,9 @@ def main():
 				 'clear',
 				 'date',
 				 'exit',
-			 	 'cd',
 				 'time',
+				 'cd',
+				 'nslookup',
 				 'google',
 				 'ping',
 				 'dir',
@@ -188,6 +189,19 @@ def main():
 				os.chdir(path)
 			except OSError:
 				print("Invalid path")
+			main()
+		elif command == 'nslookup':
+			target = input("IP/domain: ")
+			if target == '':
+				print(f"'{target}' is not a valid IP/domain")
+				main()
+			if target == ' ':
+				print(f"'{target}' is not a valid IP/domain")
+				main()
+			if ' ' in target:
+				print(f"'{target}' is not a valid IP/domain")
+				main()
+			system(f'nslookup {target}')
 			main()
 		elif command not in valid:
 		    print(f"{command} is not recognised as a valid command")
