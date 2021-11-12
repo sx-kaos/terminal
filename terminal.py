@@ -141,6 +141,8 @@ def main():
 			print(f"dir - displays all files in the current directory")
 			print(f"google - searchs something in your installed webbrowser")
 			print(f"ip/ifconfig - displays IP information")
+			print(f"nslookup - lookup a domain or IP address")
+			print(f"cd - change directory")
 			print(f"exit - closes the terminal")
 			main()
 		elif command == 'date':
