@@ -11,4 +11,3 @@ pip install colorama
 pip install ctypes
 pip install sys
 pip install win32api
-pip install halo
