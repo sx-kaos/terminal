@@ -29,35 +29,6 @@ def print_slow(str):
         sleep(0.01)
 
 
-#gathering all system information needed
-class needed():
-    ctypes.windll.kernel32.SetConsoleTitleW(f" ")
-    today = date.today()
-    now = datetime.now()
-    date = today.strftime("%B %d, %Y")
-    print("Collected date and time...")
-    username = os.getlogin()
-    os_name = platform.system()
-    print("Collected Name...")
-    os_release = platform.release()
-    print("Collected OS release and name...")
-    cpu = cpuinfo.get_cpu_info()['brand_raw']
-    print("Collected CPU info...")
-    monitor_width = GetSystemMetrics(0)
-    monitor_height = GetSystemMetrics(1)
-    print("Collected Monitor Details...")
-    lib = ctypes.windll.kernel32
-    t = lib.GetTickCount64()
-    t = int(str(t)[:-3])
-    mins, sec = divmod(t, 60)
-    hour, mins = divmod(mins, 60)
-    days, hour = divmod(hour, 24)
-    print("Collected machine uptime...")
-    ram = round(psutil.virtual_memory().total/1000000000, 2) #in Gigabytes
-    print("Collected RAM...")
-    print("Finished collecting system information, please hold on...")
-    sleep(2)
-    os.system('cls' if os.name == 'nt' else 'clear')
 
 #colors using ansi escape sequences
 class c:
@@ -73,6 +44,36 @@ class c:
 	black = '\033[1;30;40m'
 
 
+
+#gathering all system information needed
+class needed():
+    ctypes.windll.kernel32.SetConsoleTitleW(f" ")
+    today = date.today()
+    now = datetime.now()
+    date = today.strftime("%B %d, %Y")
+    print(f"{c.green}[+] {c.white}Collected date and time...")
+    username = os.getlogin()
+    os_name = platform.system()
+    print(f"{c.green}[+] {c.white}Collected Name...")
+    os_release = platform.release()
+    print(f"{c.green}[+] {c.white}Collected OS release and name...")
+    cpu = cpuinfo.get_cpu_info()['brand_raw']
+    print(f"{c.green}[+] {c.white}Collected CPU info...")
+    monitor_width = GetSystemMetrics(0)
+    monitor_height = GetSystemMetrics(1)
+    print(f"{c.green}[+] {c.white}Collected Monitor Details...")
+    lib = ctypes.windll.kernel32
+    t = lib.GetTickCount64()
+    t = int(str(t)[:-3])
+    mins, sec = divmod(t, 60)
+    hour, mins = divmod(mins, 60)
+    days, hour = divmod(hour, 24)
+    print(f"{c.green}[+] {c.white}Collected machine uptime...")
+    ram = round(psutil.virtual_memory().total/1000000000, 2) #in Gigabytes
+    print(f"{c.green}[+] {c.white}Collected RAM...")
+    print(f"{c.green}[+] {c.white}Finished collecting system information, please hold on...")
+    sleep(2)
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 print(f"""
 {c.cyan}╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮
