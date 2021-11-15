@@ -1,4 +1,4 @@
-import os 
+import os
 import time
 import pynput
 import datetime
@@ -21,28 +21,42 @@ from win32api import GetSystemMetrics
 from alive_progress import alive_bar
 from halo import Halo
 
+#terminal style typing
+def print_slow(str):
+    for letter in str:
+        sys.stdout.write(letter)
+        sys.stdout.flush()
+        sleep(0.01)
+
+
 #gathering all system information needed
 class needed():
     ctypes.windll.kernel32.SetConsoleTitleW(f" ")
-    spinner = Halo(text='Loading', spinner='dots', color = 'cyan') #front end
-    spinner.start() #loading screen whilst gathering system info
     today = date.today()
     now = datetime.now()
     date = today.strftime("%B %d, %Y")
+    print("Collected date and time...")
     username = os.getlogin()
     os_name = platform.system()
+    print("Collected Name...")
     os_release = platform.release()
+    print("Collected OS release and name...")
     cpu = cpuinfo.get_cpu_info()['brand_raw']
+    print("Collected CPU info...")
     monitor_width = GetSystemMetrics(0)
     monitor_height = GetSystemMetrics(1)
+    print("Collected Monitor Details...")
     lib = ctypes.windll.kernel32
     t = lib.GetTickCount64()
     t = int(str(t)[:-3])
     mins, sec = divmod(t, 60)
     hour, mins = divmod(mins, 60)
     days, hour = divmod(hour, 24)
+    print("Collected machine uptime...")
     ram = round(psutil.virtual_memory().total/1000000000, 2) #in Gigabytes
-    spinner.stop() # stop loading screen once system info gathered
+    print("Collected RAM...")
+    print("Finished collecting system information, please hold on...")
+    sleep(2)
     os.system('cls' if os.name == 'nt' else 'clear')
 
 #colors using ansi escape sequences
@@ -58,12 +72,7 @@ class c:
 	white = '\033[1;37;40m'
 	black = '\033[1;30;40m'
 
-#terminal style typing
-def print_slow(str):
-    for letter in str:
-        sys.stdout.write(letter)
-        sys.stdout.flush()
-        time.sleep((random.randrange(0.001, 0.275)))
+
 
 print(f"""
 {c.cyan}╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮
@@ -77,8 +86,7 @@ print(f"""
 """)
 def main():
 	try:
-		print(f"{c.white}╭{needed.username}@lunar")
-		command = input(f"{c.white}╰─→ ")
+		command = input(f"{needed.username}@lunar:~$ ")
 		valid = ['neofetch',
 				 'help',
 				 'cls',
@@ -93,7 +101,6 @@ def main():
 				 'google',
 				 'ping',
 				 'dir',
-				 'py',
 				 '',
 				 '	']
 		if command == 'cls':
@@ -134,19 +141,19 @@ def main():
 			print(f"{c.white}╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯")
 			main()
 		elif command == 'help':
+			print("")
 			print(f"help - shows all commands")
 			print(f"neofetch - displays (some) system information")
 			print(f"cls/clear - clears the window")
 			print(f"date/time - displays date or time")
 			print(f"ping - ping a domain or IP address")
 			print(f"dir - displays all files in the current directory")
-			print(f"google - searchs something in your installed webbrowser")
+			print(f"{c.blue}g{c.red}o{c.yellow}o{c.blue}g{c.green}l{c.red}e{c.white} - searchs something in your installed webbrowser")
 			print(f"ip/ifconfig - displays IP information")
 			print(f"nslookup - lookup a domain or IP address")
 			print(f"cd - change directory")
-			print(f"mkdir - make a folder")
-			print(f"py - open the python shell inside of the terminal")
 			print(f"exit - closes the terminal")
+			print("")
 			main()
 		elif command == 'date':
 			print(f"{needed.date}")
@@ -185,7 +192,7 @@ def main():
 			os.system('ipconfig /all')
 			main()
 		elif command == 'dir':
-			os.system(f'dir /a')
+			os.system(f'dir /b')
 			main()
 		elif command == 'cd':
 			path = input("Path: ")
@@ -214,9 +221,6 @@ def main():
 			except FileNotFoundError:
 				print(f"'{folder}' is not a valid name for a folder")
 				main()
-			main()
-		elif command == 'py':
-			system('py')
 			main()
 		elif command not in valid:
 		    print(f"{command} is not recognised as a valid command")
