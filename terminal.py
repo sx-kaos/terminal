@@ -156,6 +156,7 @@ def load():
 				print(f"ip/ifconfig - displays IP information")
 				print(f"nslookup - lookup a domain or IP address")
 				print(f"cd - change directory")
+				print(f"reload - reloads the terminal")
 				print(f"exit - closes the terminal")
 				print("")
 				main()
