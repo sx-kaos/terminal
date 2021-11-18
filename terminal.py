@@ -1,3 +1,4 @@
+
 import os
 import time
 import pynput
@@ -53,27 +54,27 @@ def load():
 	    today = date.today()
 	    now = datetime.now()
 	    date = today.strftime("%B %d, %Y")
-	    print(f"{c.green}[+] {c.white}Collected date and time...")
+	    print(f"{c.green}[√] {c.white}Collected date and time...")
 	    username = os.getlogin()
 	    os_name = platform.system()
-	    print(f"{c.green}[+] {c.white}Collected Name...")
+	    print(f"{c.green}[√] {c.white}Collected Name...")
 	    os_release = platform.release()
-	    print(f"{c.green}[+] {c.white}Collected OS release and name...")
+	    print(f"{c.green}[√] {c.white}Collected OS release and name...")
 	    cpu = cpuinfo.get_cpu_info()['brand_raw']
-	    print(f"{c.green}[+] {c.white}Collected CPU info...")
+	    print(f"{c.green}[√] {c.white}Collected CPU info...")
 	    monitor_width = GetSystemMetrics(0)
 	    monitor_height = GetSystemMetrics(1)
-	    print(f"{c.green}[+] {c.white}Collected Monitor Details...")
+	    print(f"{c.green}[√] {c.white}Collected Monitor Details...")
 	    lib = ctypes.windll.kernel32
 	    t = lib.GetTickCount64()
 	    t = int(str(t)[:-3])
 	    mins, sec = divmod(t, 60)
 	    hour, mins = divmod(mins, 60)
 	    days, hour = divmod(hour, 24)
-	    print(f"{c.green}[+] {c.white}Collected machine uptime...")
+	    print(f"{c.green}[√] {c.white}Collected machine uptime...")
 	    ram = round(psutil.virtual_memory().total/1000000000, 2) #in Gigabytes
-	    print(f"{c.green}[+] {c.white}Collected RAM...")
-	    print(f"{c.green}[+] {c.white}Finished collecting system information, please hold on...")
+	    print(f"{c.green}[√] {c.white}Collected RAM...")
+	    print(f"{c.green}[√] {c.white}Finished collecting system information, please hold on...")
 	    sleep(2)
 	    os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -152,6 +153,7 @@ def load():
 				print(f"date/time - displays date or time")
 				print(f"ping - ping a domain or IP address")
 				print(f"dir - displays all files in the current directory")
+				print(f"mkdir - make a folder")
 				print(f"{c.blue}g{c.red}o{c.yellow}o{c.blue}g{c.green}l{c.red}e{c.white} - searchs something in your installed webbrowser")
 				print(f"ip/ifconfig - displays IP information")
 				print(f"nslookup - lookup a domain or IP address")
@@ -197,7 +199,7 @@ def load():
 				os.system('ipconfig /all')
 				main()
 			elif command == 'dir':
-				os.system(f'dir /b')
+				os.system(f'dir')
 				main()
 			elif command == 'cd':
 				path = input("Path: ")
