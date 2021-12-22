@@ -1,13 +1,13 @@
-pip install os
-pip install datetime
-pip install psutil
-pip install platformdirs
-pip install webbrowser
-pip install random
-pip install GPUtil
-pip install py-cpuinfo
-pip install string
-pip install colorama
-pip install ctypes
-pip install sys
-pip install win32api
+os
+datetime
+psutil
+platformdirs
+webbrowser
+random
+GPUtil
+py-cpuinfo
+string
+colorama
+ctypes
+sys
+win32api
